@@ -22,8 +22,9 @@ class AutoLoader
     public static function loader(string $className): void
     {
         $root = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
-        if (file_exists($root . $className . '.php')) {
-            require_once $root . $className . '.php';
+        $filePath = str_replace("\\", "/", $root . $className . '.php');
+        if (file_exists($filePath)) {
+            require_once $filePath;
         }
     }
 }
