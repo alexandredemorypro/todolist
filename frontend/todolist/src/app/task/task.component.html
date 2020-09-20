@@ -1,0 +1,81 @@
+<div id="tasks" class="card-body">
+  <ng-container *ngFor="let task of tasks|async">
+    <ng-container *ngIf="task.id !== null">
+      <section id="task" class="card">
+        <button type="button" class="close float-left position-absolute" style="left: 5px" aria-label="Update" (click)="taskUpdate(task)">
+          <span aria-hidden="true">&uarr;</span>
+        </button>
+        <button type="button" class="close float-right position-absolute" style="right: 5px" aria-label="Delete" (click)="taskDelete(task.id)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <a class="btn" role="button" (click)="subtasks.subtaskShow('subtask-modal' + categoryId, task.id)">
+          <h3>{{ task.name }}</h3>
+          <p>
+            {{ task.description }}
+          </p>
+        </a>
+      </section>
+      <jw-modal id="task-update-modal{{ task.id }}">
+        <div class="card-body">
+          <form [formGroup]="formUpdate" (ngSubmit)="onSubmitUpdate()">
+            <div class="form-group">
+              <label for="titleup">Title</label>
+              <input id="titleup" type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && fup.title.errors }" />
+              <div *ngIf="submitted && fup.title.errors" class="invalid-feedback">
+                <div *ngIf="fup.title.errors.required">Title is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descriptionup">Description</label>
+              <input id="descriptionup" type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && fup.description.errors }" />
+              <div *ngIf="submitted && fup.description.errors" class="invalid-feedback">
+                <div *ngIf="fup.description.errors.required">Description is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Update task !
+              </button>
+            </div>
+          </form>
+        </div>
+      </jw-modal>
+    </ng-container>
+  </ng-container>
+</div>
+<div *ngIf="!createTask" class="card-body">
+  <section id="task-add" class="card card-body rounded-pill text-center">
+    <button type="button" title="Add a task" class="btn" (click)="taskAdd()">
+      <h3>+</h3>
+    </button>
+  </section>
+</div>
+<div *ngIf="createTask" class="card-body">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input id="title" type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+        <div *ngIf="f.title.errors.required">Title is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input id="description" type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+      <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+        <div *ngIf="f.description.errors.required">Description is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Create task !
+      </button>
+    </div>
+  </form>
+</div>
+
+<jw-modal id="subtask-modal{{ categoryId }}">
+  <app-subtask></app-subtask>
+</jw-modal>

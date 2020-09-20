@@ -1,0 +1,29 @@
+Docker to keep database isolated
+ - docker-compose up
+
+To create database schema and feed it
+ - php -f database.php
+ 
+To launch backend server
+ - php -S 127.0.0.1:3100
+ 
+To launch frontend server
+ - npm i
+ - npm start
+ 
+ projet : 34h
+ PHP 7.4
+ mysql 8
+ 
+
+ TODO
+  - inject everything
+  - use service instead of singleton as i do
+  - error management
+  - logging system
+  - add interfaces
+  - extract routes from router and make a config file
+  - add cache management
+  - use session to keep user logged in
+  - max try per minutes for login route
+  

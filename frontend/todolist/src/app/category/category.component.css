@@ -1,0 +1,7 @@
+:host {
+  display: flex;
+}
+
+:host > div {
+  flex: 1 1 0;
+}
