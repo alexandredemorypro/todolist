@@ -93,16 +93,16 @@ SQL;
 
             /* Items Inserts */
             $sql = <<<'SQL'
-INSERT INTO `items` (`name`, `description`)
-VALUES ('tech test', 'Thing i am doing');
+INSERT INTO `items` (`category_id`, `name`, `description`)
+VALUES (1, 'tech test', 'Thing i am doing');
 SQL;
             $PDOInstance->exec($sql);
             echo "Table items seeded successfully";
 
             /* Subitems Inserts */
             $sql = <<<'SQL'
-INSERT INTO `subitems` (`name`, `description`)
-VALUES ('backend', 'from scratch !');
+INSERT INTO `subitems` (`item_id`, `name`, `description`)
+VALUES (1, 'backend', 'from scratch !');
 SQL;
             $PDOInstance->exec($sql);
             echo "Table subitems seeded successfully";
