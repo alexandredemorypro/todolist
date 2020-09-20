@@ -1,5 +1,5 @@
 Docker to keep database isolated
- - docker-compose up
+ - docker-compose up -d
 
 To create database schema and feed it
  - php -f database.php
